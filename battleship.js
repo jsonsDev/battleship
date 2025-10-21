@@ -1,17 +1,12 @@
-// Declare three variables to hold locations of each cell of the ship
-// location1, location2, location3
+let location1 = 3;
+let location2 = 4;
+let location3 = 5;
 
-// Declare a variable to hold the user's current guess
-// guess
+let guess;
+let hits = 0;
+let guesses = 0;
 
-// Declare a variable to hold the number of hits
-// hits = 0
-
-// Declare a variable to hold the number of guesses
-// guesses = 0
-
-// Declare a variable to keep track of whether ship is sunk or not
-// isSunk = false
+let isSunk = false;
 
 // Loop: while the ship is not sunk
     // Get the user's guess
