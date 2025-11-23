@@ -30,9 +30,13 @@ let model = {
             let index = ship.locations.indexOf(guess);
             if (index >= 0) {
                 ship.hits[index] = "hit";
+                if (this.shipsSunk(ship)) {
+                    this.shipsSunk++;
+                }
                 return true;
             }
         }
         return false;
-    }
+    },
+    isSunk(ship) {}
 };
