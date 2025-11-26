@@ -48,35 +48,47 @@ let model = {
 let controller = {
     guesses: 0,
 
-    processGuess(guess) {
+    parseGuess(guess) {
+        const alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 
+        if (guess === null || guess.length !== 2) {
+            alert("Oops, please enter a letter and a number on the board.");
+        } else {
+            let firstChar = guess.charAt(0);
+            let row = alphabet.indexOf(firstChar);
+            let column = guess.charAt(1);
+
+            if (isNaN(column)) {
+                alert("Oops, that isn't on the board.");
+            } else if (row < 0 || row >= model.boardSize ||
+                column < 0 || column >= model.boardSize) {
+                    alert("Oops, that's off the board!");
+            } else {
+                return row + column;
+            }
+        }
+        return null;
+    },
+
+    processGuess(guess) {
+        let location = this.parseGuess(guess);
+        if (location) {
+            this.guesses++;
+            let hit = model.fire(location);
+            if (hit && model.shipsSunk === model.numShips) {
+                view.displayMessage(`You sank all my battleships, in ${this.guesses} guesses`);
+            }
+        }
     }
 };
 
-function parseGuess(guess) {
-    const alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-
-    if (guess === null || guess.length !== 2) {
-        alert("Oops, please enter a letter and a number on the board.");
-    } else {
-        let firstChar = guess.charAt(0);
-        let row = alphabet.indexOf(firstChar);
-        let column = guess.charAt(1);
-
-        if (isNaN(column)) {
-            alert("Oops, that isn't on the board.");
-        } else if (row < 0 || row >= model.boardSize ||
-            column < 0 || column >= model.boardSize) {
-                alert("Oops, that's off the board!");
-        } else {
-            return row + column;
-        }
-    }
-    return null;
-}
-
-// console.log(parseGuess("A0"));
-// console.log(parseGuess("B6"));
-// console.log(parseGuess("G3"));
-// console.log(parseGuess("H0"));
-// console.log(parseGuess("A7"));
+// controller.processGuess("A0");
+// controller.processGuess("A6");
+// controller.processGuess("B6");
+// controller.processGuess("C6");
+// controller.processGuess("C4");
+// controller.processGuess("D4");
+// controller.processGuess("E4");
+// controller.processGuess("B0");
+// controller.processGuess("B1");
+// controller.processGuess("B2");
