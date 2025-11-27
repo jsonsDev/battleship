@@ -82,13 +82,10 @@ let controller = {
     }
 };
 
-// controller.processGuess("A0");
-// controller.processGuess("A6");
-// controller.processGuess("B6");
-// controller.processGuess("C6");
-// controller.processGuess("C4");
-// controller.processGuess("D4");
-// controller.processGuess("E4");
-// controller.processGuess("B0");
-// controller.processGuess("B1");
-// controller.processGuess("B2");
+function handleFireButton() {
+    let guessInput = document.getElementById("guessInput");
+    let guess = guessInput.value;
+    controller.processGuess(guess);
+
+    guessInput.value = "";
+}
